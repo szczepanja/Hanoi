@@ -1,6 +1,7 @@
 import scala.collection.mutable
 import scala.io.StdIn.readLine
 import scala.sys.exit
+import Console.{BOLD, GREEN, MAGENTA, RED, RESET, UNDERLINED}
 
 object Hanoi extends App {
   val disks = Array(mutable.Stack[Int](0, 1, 2), mutable.Stack[Int](), mutable.Stack[Int]())
@@ -13,25 +14,25 @@ object Hanoi extends App {
       }
     } catch {
       case i: ArrayIndexOutOfBoundsException => {
-        println("Wrong operator")
+        Console.println(s"${RESET} ${RED} Wrong operator ${RESET}")
       }
     }
   }
 
   def initialState(): Unit = {
-    println("You are playing Tower of Hanoi. Move elements to another Stack(from 0 to 2) starting from 0")
+    Console.println(s"${RESET} ${GREEN} ${UNDERLINED} You are playing Tower of Hanoi. Move element to another Stack(from 0 to 2) starting from 0 ${RESET}")
     renderStacks()
   }
 
   def isGameFinished(): Unit = {
     if (disks(0).isEmpty && disks(1).isEmpty) {
-      println("Congrats you won")
+      Console.println(s"${RESET} ${BOLD} ${MAGENTA} Congrats you won!!! 🥳🥳🥳 ${RESET}")
       exit()
     }
   }
 
   def renderStacks(): Unit = {
-    for (d <- disks) println(d)
+    for (d <- disks) println(s"${RESET} $d")
   }
 
   def play(): Unit = {
